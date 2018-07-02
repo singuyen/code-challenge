@@ -18,12 +18,11 @@ var api = {};
     - You may not use any external libraries
 
 */
-api.fanOut = (input, fn) => {
-  /**
-   * Your implementation goes here
-   */
-  return [];
-};
+api.fanOut = (input, fn) => input.reduce(
+    (acc, item) => 
+      [...acc, fn(item)],
+    []
+  );
 
 /**
  PART 2: Implement funnel.
@@ -46,12 +45,12 @@ api.fanOut = (input, fn) => {
    - You may not use any external libraries
 
  */
-api.funnel = (input, fn, startValue) => {
-  /**
-   * Your implementation goes here
-   */
-  return 0;
-};
+api.funnel = (input, fn, startValue) => 
+  input.reduce(
+    (acc, item) => 
+      fn(acc, item), 
+    startValue
+  );
 
 /**
  PART 3: Implement distill.
@@ -72,12 +71,13 @@ api.funnel = (input, fn, startValue) => {
  - You may not use any external libraries
 
  */
-api.distill = (input, fn) => {
-  /**
-   * Your implementation goes here
-   */
-  return [];
-};
+api.distill = (input, fn) => 
+  input.reduce(
+    (acc, item) => 
+      fn(item) ? [...acc, item] : acc,
+    []
+  )
+;
 
 /**
  PART 4: Implement numberOfChars.
@@ -94,12 +94,13 @@ api.distill = (input, fn) => {
  - You may not use any external libraries
 
  */
-api.numberOfChars = (input) => {
-  /**
-   * Your implementation goes here
-   */
-  return 0;
-};
+api.numberOfChars = (input) => 
+  input.reduce(
+    (acc, item) => 
+      acc + item.length
+    ,
+    0
+  );
 
 /**
  PART 5: Implement numberOfCertainChars.
@@ -118,11 +119,12 @@ api.numberOfChars = (input) => {
  - You may not use any external libraries
 
  */
-api.numberOfCertainChars = (input, c) => {
-  /**
-   * Your implementation goes here
-   */
-  return 0;
-};
+api.numberOfCertainChars = (input, c) => 
+  input.reduce(
+    (acc, item) => 
+      acc + (item.split(c).length - 1)
+      ,
+    0
+  );
 
 module.exports = api;
